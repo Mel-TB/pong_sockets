@@ -29,4 +29,8 @@ io.on("connection", (socket) => {
       io.emit("startGame", clientId);
     }
   });
+
+  socket.on("paddleMove", (paddleData) => {
+    socket.broadcast.emit("paddleMove", paddleData);
+  });
 });
