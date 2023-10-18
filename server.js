@@ -14,5 +14,5 @@ server.listen(PORT, () => {
 });
 
 io.on("connection", (socket) => {
-  console.log("Client connected");
+  console.log("Client connected", socket.id);
 });
