@@ -13,6 +13,20 @@ server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+// track player count
+let readyPlayerCount = 0;
+
 io.on("connection", (socket) => {
-  console.log("Client connected", socket.id);
+  let clientId = socket.id;
+  console.log(`Client connected ${clientId}`);
+
+  socket.on("ready", () => {
+    console.log(`Player ready ${clientId}`);
+
+    readyPlayerCount++;
+
+    if (readyPlayerCount === 2) {
+      io.emit("startGame", clientId);
+    }
+  });
 });
