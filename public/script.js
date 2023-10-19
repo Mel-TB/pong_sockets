@@ -1,7 +1,7 @@
 // Canvas Related
 const canvas = document.createElement("canvas");
 const context = canvas.getContext("2d");
-const socket = io("http://localhost:3000");
+const socket = io();
 
 let isReferee = false;
 let paddleIndex = 0;
@@ -226,4 +226,8 @@ socket.on("paddleMove", (paddleData) => {
 
 socket.on("ballMove", (ballData) => {
   ({ ballX, ballY, score } = ballData);
+});
+
+socket.on("disconnect", (reason) => {
+  console.log(`Client ${socket.id} disconnected: ${reason}`);
 });
